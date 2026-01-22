@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>بيسو 💖</title>
+
+<style>
+body {
+  margin: 0;
+  text-align: center;
+  font-family: Arial;
+  background: linear-gradient(135deg,#ffb6c1,#ffc0cb,#fbc2eb);
+  overflow: hidden;
+  color: white;
+}
+
+h1 {
+  margin-top: 40px;
+  font-size: 40px;
+  background: rgba(0,0,0,0.35);
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 15px;
+  text-shadow: 2px 2px 5px #000;
+}
+
+.message {
+  font-size: 20px;
+  margin-top: 15px;
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+  background: rgba(0,0,0,0.3);
+  padding: 15px 20px;
+  border-radius: 15px;
+  text-shadow: 1px 1px 3px #000;
+}
+
+.counter {
+  margin-top: 20px;
+  font-size: 22px;
+  background: rgba(0,0,0,0.3);
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 20px;
+  text-shadow: 1px 1px 3px #000;
+}
+
+.buttons {
+  margin-top: 25px;
+}
+
+button {
+  background: #ff5fa2;
+  border: none;
+  padding: 12px 20px;
+  margin: 6px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  text-shadow: 1px 1px 2px #000;
+}
+
+button:hover {
+  transform: scale(1.07);
+  background: #ff2d75;
+}
+
+.heart {
+  position: absolute;
+  color: #ff2d75;
+  animation: float 6s infinite;
+}
+
+@keyframes float {
+  from {transform: translateY(100vh);}
+  to {transform: translateY(-10vh);}
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(0,0,0,0.55);
+  padding: 25px;
+  border-radius: 20px;
+  font-size: 20px;
+  display: none;
+  color: white;
+  text-shadow: 1px 1px 3px #000;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎂 كل سنة وانتي طيبة يا بيسو 💖</h1>
+
+<div class="message">
+يا بيسو… 🌸  
+انتي مش مجرد سنة جديدة،  
+انتي فرحة بتكبر كل يوم ✨  
+ربنا يخليكي دايمًا مبسوطة 💕  
+</div>
+
+<div class="counter" id="counter"></div>
+
+<div class="buttons">
+  <button onclick="showMessage()">💌 رسالة ليكي</button>
+  <button onclick="moreHearts()">💖 قلوب أكتر</button>
+  <button onclick="fromMo()">✨ مفاجأة من mo</button>
+</div>
+
+<div class="popup" id="popup"></div>
+
+<audio id="music" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// تاريخ ميلاد بيسو
+let birthDate = new Date("2008-01-24T00:00:00");
+
+function updateCounter() {
+  let now = new Date();
+  let diff = now - birthDate;
+
+  let seconds = Math.floor(diff / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+  let days = Math.floor(hours / 24);
+  let years = Math.floor(days / 365);
+
+  document.getElementById("counter").innerHTML =
+    `💗 بيسو عايشة بقالها:<br>
+     ${years} سنة 💫<br>
+     ${days} يوم 🌷<br>
+     ${hours} ساعة ⏳<br>
+     ${seconds} ثانية 💞`;
+}
+
+setInterval(updateCounter, 1000);
+updateCounter();
+
+// قلوب
+setInterval(() => {
+  createHeart();
+}, 350);
+
+function createHeart() {
+  let heart = document.createElement("div");
+  heart.innerHTML = "💖";
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 25 + 18 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+// أزرار الرسائل
+function showMessage() {
+  showPopup("بيسو 💕 وجودك جميل وملفت، وربنا يكتب لك أيام كلها فرح ✨");
+}
+
+function moreHearts() {
+  for (let i = 0; i < 25; i++) {
+    setTimeout(createHeart, i * 80);
+  }
+}
+
+function fromMo() {
+  showPopup("بيسو 💖 منى دايمًا تفضلي مبتسمة، لأن ضحكتك جميلة 🌸");
+}
+
+function showPopup(text) {
+  let popup = document.getElementById("popup");
+  popup.innerHTML = text + "<br><br><button onclick='closePopup()'>تمام 💗</button>";
+  popup.style.display = "block";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+</script>
+
+</body>
+</html>
